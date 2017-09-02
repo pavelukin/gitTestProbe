@@ -5,8 +5,9 @@ logging.basicConfig(format='%(name)s - %(levelname)s - %(message)s',
                     filename='bot.log'
                     )
 def talk_to_me(bot, update):
-    user_text = update.message.text 
-    print(user_text)
+    #user_text = update.message.text 
+    #print(user_text)
+    user_text = 'время кутить'
     update.message.reply_text(user_text)
 def greet_user(bot, update):
     text = 'Вызван /start'
