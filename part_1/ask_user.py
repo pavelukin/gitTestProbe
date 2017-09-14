@@ -9,10 +9,8 @@ def ask_user():
         else: 
             try : 
                 print (get_answer(question))
-            except  KeyError:
+            except  (KeyError,KeyboardInterrupt):
                 print ('задайте вопрос нормально')
-            except KeyboardInterrupt:
-                print ("...")
             except EOFError:
                 print ('нормально же общались')
 
