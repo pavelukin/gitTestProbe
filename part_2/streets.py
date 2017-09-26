@@ -21,10 +21,10 @@ for i in street_dict:
             if flag == 0:
                 street_dict.pop(j)
                 flag = 1 
-#print (street_dict)
+print (street_dict)
 for num in streets:
     street_dict[num] += 1
-#print (street_dict)
+print (street_dict)
 count_list = street_dict.values()
 buff = 0
 for it in count_list:
