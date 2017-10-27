@@ -5,6 +5,8 @@ from db import *
 from flask.ext.login import LoginManager
 from flask_login import *
 
+from flask import request
+
 
 my_flask_app = Flask(__name__)
 my_flask_app.config['SOCIAL_AUTH_USER_MODEL'] = 'db.User'
@@ -39,11 +41,21 @@ def inject_user():
 
 
 
-@my_flask_app.route('/')
-def index():
-	return render_template('index.html')
-@my_flask_app.route('/all')
+@my_flask_app.route('/', methods=['POST','GET'])
+def Mafia_game_support():
+	if request.method == "POST":
+		game = Game()
+		db_session.add(game)
+		db_session.commit() 
+		return render_template('some_page.html')
+	else:
+		return render_template('Mafia_game_support.html')
+	
+
+@my_flask_app.route('/vote')
 def some_page():
+
+
 	return render_template('some_page.html')
 
 if __name__ == "__main__":

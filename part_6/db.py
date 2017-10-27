@@ -14,7 +14,11 @@ Base.query = db_session.query_property()
 class Game(Base):
     __tablename__ = 'Game'
     id = Column(Integer,primary_key=True)
-
+    players_count = Column(String(50))
+    def __init__(self,players_count = None):
+        self.players_count = players_count
+    def __repr__(self):
+        return '<players_count>'.format(self.players_count)
 class Role(Base):
 
     __tablename__ = 'Role'
