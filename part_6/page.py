@@ -42,6 +42,7 @@ def inject_user():
 
 
 @my_flask_app.route('/', methods=['POST','GET'])
+<<<<<<< HEAD
 def empty():
     return render_template('test.html')
 
@@ -64,6 +65,23 @@ def Mafia_game_support():
 def some_page():
     a=5
     return render_template('some_page.html', b=50)
+=======
+def Mafia_game_support():
+	if request.method == "POST":
+		game = Game()
+		db_session.add(game)
+		db_session.commit() 
+		return render_template('some_page.html')
+	else:
+		return render_template('Mafia_game_support.html')
+	
+
+@my_flask_app.route('/vote')
+def some_page():
+
+
+	return render_template('some_page.html')
+>>>>>>> bfdf1737e3ee9e204f7f7788854624993634210c
 
 if __name__ == "__main__":
     my_flask_app.run(debug=True)
