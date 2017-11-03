@@ -11,7 +11,7 @@ db_session = scoped_session(sessionmaker(bind=engine))
 Base=declarative_base()
 Base.query = db_session.query_property()
 
-class Game(Base):
+class Game(Base): 
     __tablename__ = 'Game'
     id = Column(Integer,primary_key=True)
     number = Column(Integer)
@@ -55,20 +55,22 @@ class User(Base):
 
 class GameUser(Base):
     __tablename__ = 'GameUser'
-    id_gameuser = Column(Integer,primary_key=True)
-    id_game = Column(Integer, ForeignKey('Game.id'))
-    id_user = Column(Integer, ForeignKey('User.id'))
-    id_role = Column(Integer, ForeignKey('Role.id_role'))
-    status = Column(Integer)
+    id = Column(Integer,primary_key=True)
+    name = Column(String(50))
+    id_game = Column(Integer,ForeignKey('Game.id'))
+    role = Column(String(50))
+    status = Column(String(50))
 
-    def __init__(self, id_game = None, id_user = None, id_role = None, status = None):
+    def __init__(self, name = None, id_game = None, role = None, status = None):
+        
+        self.name = name
         self.id_game = id_game
-        self.id_user = id_user
-        self.id_role = id_role
+        self.role = role
         self.status = status
+        
 
     def __repr__(self):
-        return '<Status {}>'.format(self.status)
+        return '<name {}, status {}, role {}>'.format(self.name,self.status,self.role)
 
 class Night(Base):
 
@@ -92,39 +94,9 @@ class Election(Base):
     def __init__(self, id_game = None):
         self.id_game = id_game
 
-class Action(Base):
-    __tablename__ = 'Action'
-    id_action = Column(Integer,primary_key=True)
-    id_actor = Column(Integer,ForeignKey('GameUser.id_gameuser'))
-    id_subject_of_action = Column(Integer,ForeignKey('GameUser.id_gameuser'))
-    id_night = Column(Integer,ForeignKey('Night.id_night'))
-    action = Column(String(140))
-    status_before = Column(Integer)
-    status_after = Column(Integer)
 
-    def __init__(self, id_actor = None, id_subject_of_action = None, id_night = None, action = None, status_before = None, status_after = None):
-        self.id_actor = id_actor
-        self.id_subject_of_action = id_subject_of_action
-        self.id_night = id_night
-        self.action = action
-        self.status_before = status_before
-        self.status_after = status_after
 
-class Vote(Base):
-    __tablename__ = 'Vote'
-    id_vote = Column(Integer,primary_key=True)
-    id_election = Column(Integer, ForeignKey('Election.id_election'))
-    id_voter = Column(Integer, ForeignKey('GameUser.id_gameuser'))
-    id_pretender = Column(Integer, ForeignKey('GameUser.id_gameuser'))
-    status_before = Column(Integer)
-    status_after = Column(Integer)
 
-    def __init__(self, id_election = None, id_voter = None, id_pretender = None, status_before = None, status_afetr = None):
-        self.id_election = id_election
-        self.id_voter = id_voter
-        self.id_pretender = id_pretender
-        self.status_after = status_afetr
-        self.status_before = status_before
 
 
 
